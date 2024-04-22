@@ -69,6 +69,7 @@ export default function Swap() {
   const warningSwapHandler = useWarningImport()
   useDefaultsFromURLSearch()
   const { onCurrencySelection } = useSwapActionHandlers()
+  console.log('Update')
 
   const handleOutputSelect = useCallback(
     (newCurrencyOutput: Currency) => {
