@@ -1,21 +1,10 @@
 import { useTranslation } from '@pancakeswap/localization'
-import {
-  ArrowForwardIcon,
-  Box,
-  Button,
-  Flex,
-  Grid,
-  HelpIcon,
-  Link,
-  Text,
-  useMatchBreakpoints,
-} from '@pancakeswap/uikit'
-import { NextLinkFromReactRouter } from '@pancakeswap/widgets-internal'
+import { Box, Button, Flex, Grid, HelpIcon, Link, Text, useMatchBreakpoints } from '@pancakeswap/uikit'
 import { useMemo } from 'react'
 import styled, { css } from 'styled-components'
 import { useCakeLockStatus } from '../hooks/useVeCakeUserInfo'
 import { CakeLockStatus } from '../types'
-import { HeadBunny, MobileHeadBunny } from './HeadImage'
+import { MobileHeadBunny } from './HeadImage'
 
 export const PageHead = () => {
   const { t } = useTranslation()
@@ -23,9 +12,9 @@ export const PageHead = () => {
   return (
     <Flex justifyContent="space-between" flexDirection="row">
       <Flex flex="1" flexDirection="column" mr={[0, 0, '8px']}>
-        <Heading />
-        <Description />
-        <NextLinkFromReactRouter
+        {/* <Heading /> */}
+        {/* <Description /> */}
+        {/* <NextLinkFromReactRouter
           to="/swap?chain=bsc&inputCurrency=BNB&outputCurrency=0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82"
           prefetch={false}
         >
@@ -35,12 +24,12 @@ export const PageHead = () => {
             </Text>
             <ArrowForwardIcon color="primary" />
           </Button>
-        </NextLinkFromReactRouter>
+        </NextLinkFromReactRouter> */}
       </Flex>
 
-      <Box>
+      {/* <Box>
         <HeadBunny />
-      </Box>
+      </Box> */}
     </Flex>
   )
 }

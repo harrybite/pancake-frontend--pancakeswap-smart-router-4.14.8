@@ -1,13 +1,9 @@
 import { useTranslation } from '@pancakeswap/localization'
-import { Grid, Heading, ModalV2, PageHeader, QuestionHelper, useMatchBreakpoints } from '@pancakeswap/uikit'
-import { formatBigInt, formatNumber } from '@pancakeswap/utils/formatBalance'
-import { formatAmount } from '@pancakeswap/utils/formatInfoNumbers'
-import Page from 'components/Layout/Page'
+import { ModalV2, PageHeader, useMatchBreakpoints } from '@pancakeswap/uikit'
 import { useCakeDistributed } from 'hooks/useCakeDistributed'
 import useTheme from 'hooks/useTheme'
 import { useState } from 'react'
 import styled from 'styled-components'
-import { BenefitCard } from './components/BenefitCard'
 import { CakeRewardsCard } from './components/CakeRewardsCard'
 import { LockCake } from './components/LockCake'
 import { PageHead } from './components/PageHead'
@@ -33,10 +29,10 @@ const CakeStaking = () => {
       <StyledPageHeader background={isMobile ? theme.colors.gradientInverseBubblegum : undefined}>
         <PageHead />
         <LockCake />
-        <Heading scale="xl" color="secondary" mt={['40px', '40px', '45px']} mb={['24px', '24px', '48px']}>
+        {/* <Heading scale="xl" color="secondary" mt={['40px', '40px', '45px']} mb={['24px', '24px', '48px']}>
           {t('Benefits of veCAKE')}
-        </Heading>
-        <Grid
+        </Heading> */}
+        {/* <Grid
           maxWidth="820px"
           gridGap="24px"
           gridTemplateColumns={isDesktop ? 'repeat(2, 1fr)' : '1fr'}
@@ -75,9 +71,9 @@ const CakeStaking = () => {
             dataText={`${gaugesVotingCount ?? 0}`}
             onClick={() => {}}
           />
-        </Grid>
+        </Grid> */}
       </StyledPageHeader>
-      <Page title={t('CAKE Staking')}>
+      {/* <Page title={t('CAKE Staking')}>
         <Heading scale="xl" mb={['24px', '24px', '48px']} mt={['16px', '16px', 0]}>
           {t('And So Much More...')}
         </Heading>
@@ -132,7 +128,7 @@ const CakeStaking = () => {
           />
           <BenefitCard type="more" />
         </Grid>
-      </Page>
+      </Page> */}
     </>
   )
 }

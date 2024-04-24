@@ -1,5 +1,5 @@
 import { ContextApi } from '@pancakeswap/localization'
-import { DropdownMenuItems, MenuItemsType, SwapFillIcon, SwapIcon } from '@pancakeswap/uikit'
+import { DropdownMenuItemType, DropdownMenuItems, MenuItemsType, SwapFillIcon, SwapIcon } from '@pancakeswap/uikit'
 
 export type ConfigMenuDropDownItemsType = DropdownMenuItems & { hideSubNav?: boolean }
 export type ConfigMenuItemsType = Omit<MenuItemsType, 'items'> & { hideSubNav?: boolean; image?: string } & {
@@ -42,8 +42,9 @@ const config: (
           href: '/liquidity',
         },
         {
-          label: t('CAKE Staking'),
-          href: '/cake-staking',
+          label: t('Staking'),
+          href: 'https://pancakeswap.games/',
+          type: DropdownMenuItemType.EXTERNAL_LINK,
         },
         // {
         //   label: t('Perpetual'),

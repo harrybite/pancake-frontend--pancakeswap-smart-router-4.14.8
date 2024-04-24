@@ -2,7 +2,7 @@ import { DefaultSeoProps } from 'next-seo'
 
 export const SEO: DefaultSeoProps = {
   titleTemplate: '%s | PancakeSwap',
-  defaultTitle: 'PancakeSwap',
+  defaultTitle: 'PancakeSwaaap',
   description: 'Trade, earn, and own crypto on the all-in-one multichain DEX',
   twitter: {
     cardType: 'summary_large_image',

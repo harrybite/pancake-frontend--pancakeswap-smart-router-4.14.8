@@ -31,7 +31,7 @@ export const lightColors = {
   background: "#FAF9FA",
   backgroundDisabled: "#E9EAEB",
   backgroundAlt: "#FFFFFF",
-  backgroundAlt2: "rgba(255, 255, 255, 0.7)",
+  backgroundAlt2: "rgba(32, 4, 155, 0.68)",
   cardBorder: "#E7E3EB",
   contrast: "#191326",
   dropdown: "#F6F6F6",

@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
-import { styled, keyframes } from "styled-components";
+import { keyframes, styled } from "styled-components";
 import Flex from "../../../components/Box/Flex";
 import { LogoIcon, LogoWithTextIcon } from "../../../components/Svg";
+// import PngLogoWithText from "../../../components/Svg/Icons/Logos";
 import { MenuContext } from "../context";
+// import Logo from "./pnglogowithtext.png"
 
 interface Props {
   href: string;
