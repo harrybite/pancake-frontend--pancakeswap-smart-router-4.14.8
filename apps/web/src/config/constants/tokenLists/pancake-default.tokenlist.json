@@ -19,6 +19,14 @@
       "logoURI": "https://tokens.pancakeswap.finance/images/symbol/bnb.png"
     },
     {
+      "name": "Alaaddin.ai",
+      "symbol": "aldin",
+      "address": "0xCb0ED159d8227874b09464f182C12929dF5EDB70",
+      "chainId": 56,
+      "decimals": 9,
+      "logoURI": "https://res.cloudinary.com/dimofdvnt/image/upload/v1714540402/dtv5dgirlitoawyuft2i.png"
+    },
+    {
       "name": "BUSD Token",
       "symbol": "BUSD",
       "address": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
@@ -148,7 +156,7 @@
     },
     {
       "name": "PancakeSwap Token",
-      "symbol": "CAKE2",
+      "symbol": "CAKE2222",
       "address": "0x8d008B313C1d6C7fE2982F62d32Da7507cF43551",
       "chainId": 97,
       "decimals": 18,

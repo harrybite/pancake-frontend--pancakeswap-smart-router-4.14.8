@@ -1,8 +1,9 @@
 import { useTranslation } from '@pancakeswap/localization'
 import { Currency, CurrencyAmount, Price, Trade, TradeType } from '@pancakeswap/sdk'
-import { CAKE, USDC, USDT, STABLE_COIN } from '@pancakeswap/tokens'
+import { CAKE, STABLE_COIN, USDC, USDT } from '@pancakeswap/tokens'
 import tryParseAmount from '@pancakeswap/utils/tryParseAmount'
 import { useUserSlippage } from '@pancakeswap/utils/user'
+import { useQuery } from '@tanstack/react-query'
 import { SLOW_INTERVAL } from 'config/constants'
 import { DEFAULT_INPUT_CURRENCY } from 'config/constants/exchange'
 import { useTradeExactIn, useTradeExactOut } from 'hooks/Trades'
@@ -14,7 +15,6 @@ import { useAtom, useAtomValue } from 'jotai'
 import { useRouter } from 'next/router'
 import { ParsedUrlQuery } from 'querystring'
 import { useEffect, useMemo, useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
 import { safeGetAddress } from 'utils'
 import { computeSlippageAdjustedAmounts } from 'utils/exchange'
 import { getTokenAddress } from 'views/Swap/components/Chart/utils'
@@ -27,6 +27,9 @@ import { SwapState, swapReducerAtom } from './reducer'
 import { PairDataTimeWindowEnum } from './types'
 
 export function useSwapState() {
+  // const dat = useAtomValue(swapReducerAtom)
+  // console.log('swapReducerAtom', dat, swapReducerAtom)
+
   return useAtomValue(swapReducerAtom)
 }
 

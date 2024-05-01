@@ -183,23 +183,24 @@ const AccessRiskComponent: React.FC<AccessRiskProps> = ({ token }) => {
     const hasRiskValue = riskLevel && TOKEN_RISK_T[riskLevel]
     if (!hasRiskValue) return null
     return (
-      <Flex justifyContent="flex-end">
-        <div ref={targetRef} style={{ userSelect: 'none' }}>
-          <Tag variant={tagColor}>
-            <Text bold small color="invertedContrast">
-              {hasRiskValue}
-            </Text>
-            {tooltipVisible && tooltip}
-            <Flex>
-              {data?.hasResult ? (
-                <HelpIcon ml="4px" width="16px" height="16px" color="invertedContrast" />
-              ) : (
-                <AutoRenewIcon spin ml="4px" width="20px" height="20px" color="invertedContrast" />
-              )}
-            </Flex>
-          </Tag>
-        </div>
-      </Flex>
+      <></>
+      // <Flex justifyContent="flex-end">
+      //   <div ref={targetRef} style={{ userSelect: 'none' }}>
+      //     <Tag variant={tagColor}>
+      //       <Text bold small color="invertedContrast">
+      //         {hasRiskValue}
+      //       </Text>
+      //       {tooltipVisible && tooltip}
+      //       <Flex>
+      //         {data?.hasResult ? (
+      //           <HelpIcon ml="4px" width="16px" height="16px" color="invertedContrast" />
+      //         ) : (
+      //           <AutoRenewIcon spin ml="4px" width="20px" height="20px" color="invertedContrast" />
+      //         )}
+      //       </Flex>
+      //     </Tag>
+      //   </div>
+      // </Flex>
     )
   }
 
