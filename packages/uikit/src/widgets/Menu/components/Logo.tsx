@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { keyframes, styled } from "styled-components";
 import Flex from "../../../components/Box/Flex";
-import { LogoIcon, LogoWithTextIcon } from "../../../components/Svg";
 // import PngLogoWithText from "../../../components/Svg/Icons/Logos";
 import { MenuContext } from "../context";
 // import Logo from "./pnglogowithtext.png"
@@ -48,8 +47,16 @@ const Logo: React.FC<React.PropsWithChildren<Props>> = ({ href }) => {
   const isAbsoluteUrl = href.startsWith("http");
   const innerLogo = (
     <>
-      <LogoIcon className="mobile-icon" />
-      <LogoWithTextIcon className="desktop-icon" />
+      <img
+        src="https://res.cloudinary.com/dimofdvnt/image/upload/v1714540402/dtv5dgirlitoawyuft2i.png"
+        alt=""
+        className="mobile-icon"
+      />
+      <img
+        src="https://res.cloudinary.com/dimofdvnt/image/upload/v1714540422/tjjxllgczqjvs7hn3nfd.png"
+        alt=""
+        className="desktop-icon"
+      />
     </>
   );
 

@@ -1,16 +1,17 @@
-import { formatEther } from 'viem'
+import { dehydrate, QueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import { gql } from 'graphql-request'
 import { GetStaticProps } from 'next'
-import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { getCakeVaultAddress } from 'utils/addressHelpers'
 import { getCakeContract } from 'utils/contractHelpers'
 import { getBlocksFromTimestamps } from 'utils/getBlocksFromTimestamps'
 import { bitQueryServerClient, infoServerClient } from 'utils/graphql'
-import Home from '../views/Home'
+import { formatEther } from 'viem'
+// import Home from '../views/Home'
+import SwapPage from './swap'
 
 const IndexPage = () => {
-  return <Home />
+  return <SwapPage />
 }
 
 // Values fetched from TheGraph and BitQuery jan 24, 2022

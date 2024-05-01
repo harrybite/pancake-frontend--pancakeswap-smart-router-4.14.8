@@ -93,7 +93,7 @@ export { default as LineaIcon } from "./Icons/Linea";
 export { default as ListViewIcon } from "./Icons/ListView";
 export { default as LockIcon } from "./Icons/Lock";
 export { default as LoginIcon } from "./Icons/Login";
-export { default as LogoIcon } from "./Icons/Logo";
+export { AlaadinLogo as LogoAl, default as LogoIcon } from "./Icons/Logo";
 export { default as LogoRoundIcon } from "./Icons/LogoRound";
 export { default as LogoWithTextIcon } from "./Icons/LogoWithText";
 export { default as LogoutIcon } from "./Icons/Logout";
