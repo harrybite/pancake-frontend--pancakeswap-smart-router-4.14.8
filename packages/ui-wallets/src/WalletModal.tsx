@@ -11,21 +11,13 @@ import {
   ModalWrapper,
   MoreHorizontalIcon,
   SvgProps,
-  Tab,
-  TabMenu,
   Text,
   WarningIcon,
 } from '@pancakeswap/uikit'
 import { atom, useAtom } from 'jotai'
 import { PropsWithChildren, Suspense, lazy, useMemo, useState } from 'react'
 import { isMobile } from 'react-device-detect'
-import {
-  desktopWalletSelectionClass,
-  modalWrapperClass,
-  promotedGradientClass,
-  walletIconClass,
-  walletSelectWrapperClass,
-} from './WalletModal.css'
+import { modalWrapperClass, promotedGradientClass, walletIconClass, walletSelectWrapperClass } from './WalletModal.css'
 
 const StepIntro = lazy(() => import('./components/Intro'))
 
@@ -82,10 +74,10 @@ const TabContainer = ({ children, docLink, docText }: PropsWithChildren<{ docLin
   return (
     <AtomBox position="relative" zIndex="modal" className={modalWrapperClass}>
       <AtomBox position="absolute" style={{ top: '-50px' }}>
-        <TabMenu activeIndex={index} onItemClick={setIndex} gap="0px" isColorInverse isShowBorderBottom={false}>
+        {/* <TabMenu activeIndex={index} onItemClick={setIndex} gap="0px" isColorInverse isShowBorderBottom={false}>
           <Tab>{t('Connect Wallet')}</Tab>
           <Tab>{t('What’s a Web3 Wallet?')}</Tab>
-        </TabMenu>
+        </TabMenu> */}
       </AtomBox>
       <AtomBox
         display="flex"
@@ -168,7 +160,7 @@ function MobileModal<T>({
           }}
         />
       </AtomBox>
-      <AtomBox p="24px" borderTop="1">
+      {/* <AtomBox p="24px" borderTop="1">
         <AtomBox>
           <Text textAlign="center" color="textSubtle" as="p" mb="24px">
             {t('Haven’t got a crypto wallet yet?')}
@@ -177,7 +169,7 @@ function MobileModal<T>({
         <Button as="a" href={docLink} variant="subtle" width="100%" external>
           {docText}
         </Button>
-      </AtomBox>
+      </AtomBox> */}
     </AtomBox>
   )
 }
@@ -321,11 +313,11 @@ function DesktopModal<T>({
       <AtomBox
         display="flex"
         flexDirection="column"
-        bg="backgroundAlt"
+        // bg="backgroundAlt"
         py="32px"
-        zIndex="modal"
-        borderRadius="card"
-        className={desktopWalletSelectionClass}
+        // zIndex="modal"
+        // borderRadius="card"
+        // className={desktopWalletSelectionClass}
       >
         <AtomBox px="48px">
           <Heading color="color" as="h4">
@@ -355,7 +347,7 @@ function DesktopModal<T>({
           }}
         />
       </AtomBox>
-      <AtomBox
+      {/* <AtomBox
         flex={1}
         mx="24px"
         display={{
@@ -383,7 +375,7 @@ function DesktopModal<T>({
           )}
           {selected && selected.installed === false && <NotInstalled qrCode={qrCode} wallet={selected} />}
         </AtomBox>
-      </AtomBox>
+      </AtomBox> */}
     </>
   )
 }

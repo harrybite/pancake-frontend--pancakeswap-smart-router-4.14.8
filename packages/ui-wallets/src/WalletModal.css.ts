@@ -1,6 +1,6 @@
 import { atoms } from '@pancakeswap/uikit/css/atoms'
 import { responsiveStyle } from '@pancakeswap/uikit/css/responsiveStyle'
-import { style, keyframes } from '@vanilla-extract/css'
+import { keyframes, style } from '@vanilla-extract/css'
 
 const promotedGradientKf = keyframes({
   '0%': {

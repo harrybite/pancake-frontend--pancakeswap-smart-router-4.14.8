@@ -5,8 +5,7 @@ import { styled } from "styled-components";
 import { AtomBox } from "../../components/AtomBox";
 import { Box } from "../../components/Box";
 import Flex from "../../components/Box/Flex";
-import LangSelector from "../../components/LangSelector/LangSelector";
-import MenuItems from "../../components/MenuItems/MenuItems";
+import MenuItems from "../../components/MenuItems";
 import { useMatchBreakpoints } from "../../contexts";
 import Logo from "./components/Logo";
 import { MENU_HEIGHT, TOP_BANNER_HEIGHT, TOP_BANNER_HEIGHT_MOBILE } from "./config";
@@ -154,14 +153,14 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
                   <CakePrice chainId={chainId} showSkeleton={false} cakePriceUsd={cakePriceUsd} />
                 </AtomBox> */}
                 <Box mt="4px">
-                  <LangSelector
+                  {/* <LangSelector
                     currentLang={currentLang}
                     langs={langs}
                     setLang={setLang}
                     buttonScale="xs"
                     color="textSubtle"
                     hideLanguage
-                  />
+                  /> */}
                 </Box>
                 {rightSide}
               </Flex>
