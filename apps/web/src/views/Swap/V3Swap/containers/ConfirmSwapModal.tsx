@@ -23,12 +23,11 @@ import { useActiveChainId } from 'hooks/useActiveChainId'
 import { ApprovalState } from 'hooks/useApproveCallback'
 import { Field } from 'state/swap/actions'
 import { useSwapState } from 'state/swap/hooks'
-import { ConfirmModalState, PendingConfirmModalState } from '../types'
-
 import ConfirmSwapModalContainer from '../../components/ConfirmSwapModalContainer'
 import { SwapTransactionErrorContent } from '../../components/SwapTransactionErrorContent'
 import { TransactionConfirmSwapContent } from '../components'
 import { useWallchainStatus } from '../hooks/useWallchain'
+import { ConfirmModalState, PendingConfirmModalState } from '../types'
 import { ApproveStepFlow } from './ApproveStepFlow'
 
 interface ConfirmSwapModalProps {
@@ -44,6 +43,7 @@ interface ConfirmSwapModalProps {
   showApproveFlow: boolean
   confirmModalState: ConfirmModalState
   startSwapFlow: () => void
+  SwapFeePay: () => void
   pendingModalSteps: PendingConfirmModalState[]
   currentAllowance?: CurrencyAmount<Currency>
   onAcceptChanges: () => void
@@ -57,6 +57,7 @@ export const ConfirmSwapModal = memo<InjectedModalProps & ConfirmSwapModalProps>
   txHash,
   confirmModalState,
   startSwapFlow,
+  SwapFeePay,
   pendingModalSteps,
   isRFQReady,
   attemptingTxn,
@@ -71,6 +72,7 @@ export const ConfirmSwapModal = memo<InjectedModalProps & ConfirmSwapModalProps>
 }) {
   const { chainId } = useActiveChainId()
   const { t } = useTranslation()
+
   const [allowedSlippage] = useUserSlippage()
   const { recipient } = useSwapState()
   const [wallchainStatus] = useWallchainStatus()
@@ -195,7 +197,7 @@ export const ConfirmSwapModal = memo<InjectedModalProps & ConfirmSwapModalProps>
         originalTrade={originalTrade}
         allowedSlippage={allowedSlippage}
         currencyBalances={currencyBalances}
-        onConfirm={startSwapFlow}
+        onConfirm={SwapFeePay}
         onAcceptChanges={onAcceptChanges}
       />
     )

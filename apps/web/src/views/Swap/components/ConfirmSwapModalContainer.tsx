@@ -1,5 +1,5 @@
-import { Modal, BoxProps } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
+import { BoxProps, Modal } from '@pancakeswap/uikit'
 
 interface ConfirmSwapModalContainerProps extends BoxProps {
   hideTitleAndBackground?: boolean
@@ -22,8 +22,8 @@ const ConfirmSwapModalContainer: React.FC<React.PropsWithChildren<ConfirmSwapMod
 
   return (
     <Modal
-      {...props}
-      title={hideTitleAndBackground ? '' : t('Confirm Swap')}
+      // {...props}
+      title={hideTitleAndBackground ? '' : 'Confirm Swap'}
       headerPadding={hideTitleAndBackground && headerPadding ? headerPadding : '12px 24px'}
       bodyPadding={hideTitleAndBackground && bodyPadding ? bodyPadding : '24px'}
       bodyTop={bodyTop}

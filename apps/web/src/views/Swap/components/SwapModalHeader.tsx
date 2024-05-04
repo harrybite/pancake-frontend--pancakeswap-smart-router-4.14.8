@@ -1,14 +1,14 @@
-import { ReactElement, useMemo } from 'react'
-import { TradeType, CurrencyAmount, Currency, Percent } from '@pancakeswap/sdk'
-import { Button, Text, ErrorIcon, ArrowDownIcon, AutoColumn } from '@pancakeswap/uikit'
-import { Field } from 'state/swap/actions'
 import { useTranslation } from '@pancakeswap/localization'
+import { Currency, CurrencyAmount, Percent, TradeType } from '@pancakeswap/sdk'
+import { ArrowDownIcon, AutoColumn, Button, ErrorIcon, Text } from '@pancakeswap/uikit'
 import { formatAmount } from '@pancakeswap/utils/formatFractions'
-import { warningSeverity, basisPointsToPercent } from 'utils/exchange'
-import { CurrencyLogo } from 'components/Logo'
-import { RowBetween, RowFixed } from 'components/Layout/Row'
 import truncateHash from '@pancakeswap/utils/truncateHash'
-import { TruncatedText, SwapShowAcceptChanges } from './styleds'
+import { RowBetween, RowFixed } from 'components/Layout/Row'
+import { CurrencyLogo } from 'components/Logo'
+import { ReactElement, useMemo } from 'react'
+import { Field } from 'state/swap/actions'
+import { warningSeverity } from 'utils/exchange'
+import { SwapShowAcceptChanges, TruncatedText } from './styleds'
 
 export default function SwapModalHeader({
   inputAmount,
@@ -129,23 +129,30 @@ export default function SwapModalHeader({
       ) : null}
       <AutoColumn justify="flex-start" gap="sm" style={{ padding: '24px 0 0 0px' }}>
         <RowFixed style={{ width: '100%' }}>
-          <Text fontSize={12} color="secondary" bold textTransform="uppercase">
-            {t('Slippage Tolerance')}
+          <Text fontSize={12} color="orange" bold textTransform="uppercase">
+            {t('Platform fee')}
           </Text>
-          <Text fontSize={12} bold color="primary" ml="auto" textAlign="end">
+          {/* <Text fontSize={12} bold color="primary" ml="auto" textAlign="end">
             {typeof allowedSlippage === 'number'
               ? `${basisPointsToPercent(allowedSlippage).toFixed(2)}%`
               : allowedSlippage}
-          </Text>
+          </Text> */}
         </RowFixed>
-        {tradeType === TradeType.EXACT_OUTPUT && !isEnoughInputBalance && (
+
+        {/* {tradeType === TradeType.EXACT_OUTPUT && !isEnoughInputBalance && (
           <Text fontSize={12} color="failure" textAlign="left" style={{ width: '100%' }}>
             {t('Insufficient input token balance. Your transaction may fail.')}
           </Text>
-        )}
+        )} */}
         <Text fontSize={12} color="textSubtle" textAlign="left" style={{ maxWidth: '320px' }}>
-          {tradeInfoText}
+          0.5% fee applicable on all swaps
         </Text>
+        {/* <RowFixed style={{ width: '100%' }}>
+          <Text fontSize={12} color="secondary" bold textTransform="uppercase">
+            {t('Platform fee')}
+          </Text>
+          
+        </RowFixed> */}
       </AutoColumn>
       {recipient ? (
         <AutoColumn justify="flex-start" gap="sm" style={{ padding: '12px 0 0 0px' }}>
